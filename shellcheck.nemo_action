@@ -1,0 +1,13 @@
+[Nemo Action]
+Name=Shellcheck
+Exec=bash -c 'shellcheck %F && notify-send -e Shellcheck OK || read -N1'
+Selection=s
+
+Extensions=sh;
+Mimetypes=application/x-shellscript;
+
+Comment=Shell script analysis
+Icon-Name=category-search-symbolic
+Quote=double
+Dependencies=shellcheck;
+Terminal=true

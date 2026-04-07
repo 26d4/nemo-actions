@@ -1,0 +1,16 @@
+[Nemo Action]
+Name=Total media duration
+Exec=<total_duration %P>
+Selection=none
+
+Extensions=dir
+
+Comment=Total media duration (directory %p)
+#Icon-Name=folder-symbolic
+#Separator=,
+Quote=double
+Dependencies=bash;ffprobe;awk;zenity;
+Conditions=exec bash -c 'for f in %P/*\; do file --mime-type -b "$f" | grep -qE "^(video|audio)/" && exit 0\; done\; exit 1';
+Locations=!~/mnt/*;
+UriScheme=file
+#Terminal=true

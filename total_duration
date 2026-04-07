@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+#set -x;
+
+declare -a FILES
+
+#while getopts "d:" OPT; do
+#	case "$OPT" in
+#		"d")
+#			mapfile -d $'\0' FILES_ADD < <(find "$OPTARG" -mindepth 1 -maxdepth 1 -print0)
+#			FILES+=("${FILES_ADD[@]}")
+#			;;
+#	esac
+#done
+
+#shift $((OPTIND - 1))
+
+while [ $# -gt 0 ]; do
+	if [ -d "$1" ]; then
+		mapfile -d $'\0' FILES_ADD < <(find "$1" -mindepth 1 -maxdepth 1 -print0 -type f)
+		FILES+=("${FILES_ADD[@]}")
+	else
+		FILES+=("$1")
+	fi
+	shift
+done
+
+set -- "${FILES[@]}"
+
+FIFO=$(mktemp -u)
+mkfifo $FIFO
+
+tail -f $FIFO | zenity --progress --auto-close --auto-kill --width=500 &
+#PROGRESSPID=$!
+
+TEXT=$(
+	i=0
+	for f in "$@"; do
+#		>&2 echo "$(($i*100/$#))"
+		echo "$(($i*100/$#))" >> $FIFO
+		echo "# $f" >> $FIFO
+		ffprobe -v quiet -of csv=p=0 -show_entries format=duration "$f"
+		i=$((i+1))
+	done | awk '{sum += $1}; END{printf "%dh %dm %ds\n", sum/3600, sum%3600/60, sum%60}'
+)
+
+echo 100 >> $FIFO
+#kill $PROGRESSPID
+
+rm -f $FIFO
+zenity --info --title="Total duration" --text="$TEXT"

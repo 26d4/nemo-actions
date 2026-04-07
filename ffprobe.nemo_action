@@ -1,0 +1,12 @@
+[Nemo Action]
+Name=Probe media file
+Exec=sh -c "ffprobe -hide_banner %F 2>&1 | zenity --text-info --title=ffprobe --width=1100 --height=700 --font=monospace --no-wrap"
+Selection=s
+
+Mimetypes=video/*;audio/*;
+
+Comment=Probe %f with ffprobe
+Icon-Name=media-playback-start
+Quote=single
+Dependencies=sh;ffprobe;zenity;
+Terminal=false

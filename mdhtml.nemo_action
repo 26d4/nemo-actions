@@ -1,0 +1,12 @@
+[Nemo Action]
+Name=Convert to HTML
+Exec=bash -c 'exec 3>&1; OUTPUT="$(mdhtml %F 2>&1 | tee /dev/fd/3)"; echo "$OUTPUT" | egrep "(WARNING|ERROR)" > /dev/null && read -N1 -p "Warnings/Errors generated; see above or press any key to exit"'
+Selection=s
+
+Mimetypes=text/markdown;
+
+#Comment=If you click this menu entry, %F will be acted upon!
+Icon-Name=text-html
+Quote=double
+Dependencies=mdhtml;bash;tee;egrep;
+Terminal=true

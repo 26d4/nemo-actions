@@ -1,0 +1,15 @@
+[Nemo Action]
+Name=Total media duration
+#Exec=sh -xc 'TEXT="$(for f in %F; do ffprobe -v quiet -of csv=p=0 -show_entries format=duration "$f"; done | awk "{sum += \\$1}; END{printf \\"%%%dh %%dm %%ds\\", sum/3600, sum%%3600/60, sum%%60}" 2>&1)"; zenity --info --text="$TEXT"'
+Exec=<total_duration %F>
+Selection=notnone
+
+Mimetypes=video/*;audio/*;inode/directory;
+
+Comment=Total media duration for selected files
+#Icon-Name=folder-symbolic
+#Separator=\0
+Quote=double
+#Dependencies=sh;ffprobe;awk;zenity;xargs;
+Dependencies=bash;ffprobe;awk;zenity;
+#Terminal=true
