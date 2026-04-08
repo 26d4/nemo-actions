@@ -1,7 +1,7 @@
 [Nemo Action]
 # Mandatory fields
 Name=Spaces to tabs
-Exec=bash -c 'RESULT="$(unexpand -t4 %F)"; echo -e "$(echo "$RESULT" | sed "s/\\t/\\\\\\033[44m   >\\\\\\033[0m/g")"; read -N1 -pOK?[y/N]; case "$REPLY" in "y"*|"Y"*) echo "$RESULT" > %F;; esac'
+Exec=bash -c 'RESULT="$(unexpand -t4 %F)"; echo -e "$(echo "$RESULT" | perl -pe "s/(?<=^|\\t)\\t/\\\\\\033[44m\\\\\\033[K|\\t\\\\\\033[0m\\\\\\033[K/g")"; read -N1 -pOK?[y/N]; case "$REPLY" in "y"*|"Y"*) echo "$RESULT" > %F;; esac'
 Selection=s
 
 Mimetypes=text/*;application/*;
