@@ -6,8 +6,8 @@ Selection=s
 
 Mimetypes=text/*;application/*;
 # Optional fields
-#Comment=If you click this menu entry, %F will be acted upon!
+Comment=Change indentation via unexpand
 Icon-Name=format-indent-more-symbolic
 Quote=single
-#Dependencies=notify-send;!zenity;
+Dependencies=bash;sed;unexpand;
 Terminal=true
