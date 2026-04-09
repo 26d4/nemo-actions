@@ -9,5 +9,5 @@ Mimetypes=text/*;application/*;
 Comment=Change indentation via unexpand
 Icon-Name=format-indent-more-symbolic
 Quote=single
-Dependencies=bash;sed;unexpand;
+Dependencies=bash;perl;unexpand;
 Terminal=true
