@@ -9,5 +9,6 @@ Mimetypes=text/*;application/*;
 Comment=Change indentation via expand
 Icon-Name=format-indent-more-symbolic
 Quote=double
-Dependencies=perl;unexpand;
+Dependencies=perl;expand;
+Conditions=exec grep -qIF '' %F
 Terminal=true

@@ -10,4 +10,5 @@ Comment=Change indentation via unexpand
 Icon-Name=format-indent-more-symbolic
 Quote=double
 Dependencies=perl;unexpand;
+Conditions=exec grep -qIF '' %F
 Terminal=true
