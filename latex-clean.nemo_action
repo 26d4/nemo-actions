@@ -1,0 +1,11 @@
+[Nemo Action]
+Name=Clean intermediary LaTeX files
+Exec=latexmk -cd -c %F
+Selection=s
+
+Extensions=tex;ltx;
+
+Comment=Clean intermediary LaTeX files
+#Icon-Name=xsi-folder-symbolic
+Quote=double
+Dependencies=bash;latexmk;
