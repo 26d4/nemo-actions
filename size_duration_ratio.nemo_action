@@ -1,0 +1,10 @@
+[Nemo Action]
+Name=Media size to duration ratio
+Exec=<size_duration_ratio.sh %F>
+Selection=notnone
+
+Mimetypes=video/*;audio/*;inode/directory;
+
+Comment=Which media file is most efficient?
+Quote=double
+Dependencies=bash;ffprobe;awk;zenity;
