@@ -14,7 +14,7 @@ done
 
 set -- "${FILES[@]}"
 
-FIFO=$(mktemp -u)
+FIFO=$(mktemp -u --tmpdir "$$-XXXX")
 mkfifo "$FIFO"
 
 tail -f "$FIFO" | zenity --progress --auto-close --auto-kill --width=500 &
