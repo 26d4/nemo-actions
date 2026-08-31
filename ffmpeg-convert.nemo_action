@@ -1,0 +1,11 @@
+[Nemo Action]
+Name=Convert video format
+Exec=<ffmpeg-convert.sh %F>
+Selection=s
+Mimetypes=video/*;
+
+Comment=Convert %f with ffmpeg
+Icon-Name=video-editor
+Quote=double
+Dependencies=zenity;ffmpeg;bash;awk;sed;xargs;
+Terminal=true
