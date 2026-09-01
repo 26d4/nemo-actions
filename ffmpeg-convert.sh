@@ -3,14 +3,14 @@
 select_target_format() {
 	ffmpeg -v quiet -muxers \
 		| awk '{system("ffmpeg -hide_banner -h muxer="$2); print ""}' \
-		| awk -v RS='' '/extensions:.*Mime type: +video/' \
-		| awk '/^Muxer/{print $2; print $0} /extensions:/{print $3; print ""}' \
-		| sed '/\[.*\]/{ s/^.*\[//; s/\].*// }' \
-		| awk -v RS='' -v FS='\n' '{print "FALSE", $1, $3, "\""$2"\""}' \
+		| awk -v RS='' '/extensions:.*Mime type: +(video|audio)/' \
+		| awk '/^Muxer/{print $2; print $0} /extensions:/{print $3} /Mime type:/{print $3; print ""}' \
+		| sed -e '/\[.*\]/{ s/^.*\[//; s/\].*// }' -e '/\[.*\]/! { s/,.*//; s/\.// }' \
+		| awk -v RS='' -v FS='\n' '{print "FALSE", $1, $3, $4, "\""$2"\""}' \
 	| xargs zenity --list --radiolist \
 		--width=640 --height=480 \
 		--text="Select target format" \
-		--column=_ --column=Muxer --column=Ext. --column=Description
+		--column=_ --column=Muxer --column=Ext. --column=Type --column=Description
 }
 
 muxer_ext() {

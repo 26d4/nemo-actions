@@ -1,8 +1,8 @@
 [Nemo Action]
-Name=Convert video format
+Name=Convert media format
 Exec=<ffmpeg-convert.sh %F>
 Selection=s
-Mimetypes=video/*;
+Mimetypes=video/*;audio/*;
 
 Comment=Convert %f with ffmpeg
 Icon-Name=video-editor
