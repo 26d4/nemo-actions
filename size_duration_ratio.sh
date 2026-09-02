@@ -17,6 +17,8 @@ set -- "${FILES[@]}"
 FIFO=$(mktemp -u --tmpdir"${XDG_RUNTIME_DIR:+=$XDG_RUNTIME_DIR}" "$$-XXXX")
 mkfifo "$FIFO"
 
+trap 'rm -f "$FIFO"' EXIT
+
 tail -f "$FIFO" | zenity --progress --auto-close --auto-kill --width=500 &
 
 TEXT=$(
@@ -33,5 +35,4 @@ TEXT=$(
 
 echo 100 >> "$FIFO"
 
-rm -f "$FIFO"
-zenity --text-info --title="Size to duaration ratio" --font=monospace --width=600 --height=600 --no-wrap <<< "$TEXT"
+zenity --text-info --title="Size to duaration ratio" --font=monospace --width=600 --height=600 --no-wrap <<< "$TEXT" &
