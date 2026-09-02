@@ -7,17 +7,19 @@ FFVER="$CACHE/ffmpeg-version"
 mkdir -p "$CACHE"
 
 get_muxers() {
-	if [[ ! -e "$FFVER" ]]; then
-		ffmpeg -version > "$FFVER"
-	fi
-
-	if [[ -z "$(find "$MUXCACHE" -maxdepth 0 -type f -mtime -30 '!' -empty)" ]] || [[ "$(ffmpeg -version)" != "$(cat "$FFVER")" ]]; then
+	if
+		[[ -z "$(find "$MUXCACHE" -maxdepth 0 -type f -mtime -30 '!' -empty)" ]] ||
+		[[ ! -e "$FFVER" ]] ||
+		[[ "$(ffmpeg -version)" != "$(cat "$FFVER")" ]]
+	then
 		ffmpeg -v quiet -muxers \
 		| awk '{system("ffmpeg -hide_banner -h muxer="$2); print ""}' \
 		| awk -v RS='' '/extensions:.*Mime type: +(video|audio)/' \
 		| awk '/^Muxer/{print $2; print $0} /extensions:/{print $3} /Mime type:/{print $3; print ""}' \
 		| sed -e '/\[.*\]/{ s/^.*\[//; s/\].*// }' -e '/\[.*\]/! { s/,.*//; s/\.// }' \
 		| tee "$MUXCACHE" | zenity --progress --pulsate --no-cancel --auto-close --text="Generating muxer cache"
+
+		ffmpeg -version > "$FFVER"
 	fi
 
 	cat "$MUXCACHE"
