@@ -14,7 +14,7 @@ done
 
 set -- "${FILES[@]}"
 
-FIFO=$(mktemp -u --tmpdir "$$-XXXX")
+FIFO=$(mktemp -u --tmpdir${XDG_RUNTIME_DIR:+=$XDG_RUNTIME_DIR} "$$-XXXX")
 mkfifo "$FIFO"
 
 tail -f "$FIFO" | zenity --progress --auto-close --auto-kill --width=500 &
