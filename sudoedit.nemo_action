@@ -8,5 +8,6 @@ Icon-Name=text-editor-symbolic
 Selection=s
 Mimetypes=text/*;
 Dependencies=sudoedit;xed;jq;
-EscapeSpaces=true
+Quote=double
 #Terminal=true
+Conditions=exec test ! -w %F
