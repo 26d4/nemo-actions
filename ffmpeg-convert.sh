@@ -40,4 +40,18 @@ muxer_ext() {
 MUXER=$(select_target_format)
 [[ -n "$MUXER" ]] || exit 0
 
-ffmpeg -i "$1" -f "$MUXER" "${1%.*}.$(muxer_ext "$MUXER")" || read -n1 -ppaused
+XTERM=$(gsettings get org.cinnamon.desktop.default-applications.terminal exec | tr -d "'")
+XTERM_ARG=$(gsettings get org.cinnamon.desktop.default-applications.terminal exec-arg | tr -d "'")
+if [[ -z "$XTERM" ]]; then
+	XTERM=gnome-terminal
+	XTERM_ARG=--
+fi
+
+TMPFILE=$(mktemp --tmpdir="$XDG_RUNTIME_DIR" ffmpeg-convert-XXXXX.mkv)
+ffmpeg -y -i "$1" -f matroska -c copy "$TMPFILE" || { rm "$TMPFILE"; zenity --error --text="Failed to parse source file"; exit; }
+
+"$XTERM" "$XTERM_ARG" bash -c "
+	ffmpeg -hwaccel auto -f matroska -i \"$TMPFILE\" -f \"$MUXER\" \"${1%.*}.$(muxer_ext "$MUXER")\" ||
+	read -n1 -ppaused
+	rm \"$TMPFILE\"	
+"

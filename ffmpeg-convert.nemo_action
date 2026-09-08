@@ -8,4 +8,4 @@ Comment=Convert %f with ffmpeg
 Icon-Name=video-editor
 Quote=double
 Dependencies=zenity;ffmpeg;bash;awk;sed;xargs;tee;
-Terminal=true
+Terminal=false
