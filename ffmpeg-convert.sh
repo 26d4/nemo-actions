@@ -47,7 +47,7 @@ if [[ -z "$XTERM" ]]; then
 	XTERM_ARG=--
 fi
 
-TMPFILE=$(mktemp --tmpdir="$XDG_RUNTIME_DIR" ffmpeg-convert-XXXXX.mkv)
+TMPFILE=$(mktemp --tmpdir"${XDG_RUNTIME_DIR:+=$XDG_RUNTIME_DIR}" ffmpeg-convert-XXXXX.mkv)
 ffmpeg -y -i "$1" -f matroska -c copy "$TMPFILE" || { rm "$TMPFILE"; zenity --error --text="Failed to parse source file"; exit; }
 
 "$XTERM" "$XTERM_ARG" bash -c "
