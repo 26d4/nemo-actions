@@ -8,8 +8,7 @@ else
 #	OUTPUT="$(sudoedit -A -u "$FILEOWNER" "$1" 2>&1)"
 #	notify-send -e "$OUTPUT"
 
-	URI="admin://$(jq -rn --arg x "$1" '$x|@uri' | sed 's,%2F,/,gi')"
+	URI="admin:${2#*:}"
 
 	xed "$URI"
 fi
-#read -N1 -p paused

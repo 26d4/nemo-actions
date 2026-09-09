@@ -2,12 +2,11 @@
 
 Name=Sudoedit
 Comment=Edit %f as admin.
-Exec=<sudoedit.sh %F>
-#Exec=sudoedit %F
+Exec=<sudoedit.sh %F %U>
 Icon-Name=text-editor-symbolic
 Selection=s
 Mimetypes=text/*;
-Dependencies=sudoedit;xed;jq;
+Dependencies=xdg-open;stat;xed;
 Quote=double
-#Terminal=true
+Terminal=false
 Conditions=exec test ! -w %F
