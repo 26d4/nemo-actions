@@ -1,6 +1,0 @@
-[Nemo Action]
-# Mandatory fields
-Name=Menu item label
-Exec=zenity --info --text="%F %U"
-Selection=s
-Extensions=any
