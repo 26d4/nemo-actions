@@ -5,5 +5,5 @@ Selection=s
 Mimetypes=text/*;application/*;inode/directory;
 
 Icon-Name=meld
-Dependencies=meld;cat;rm;
+Dependencies=meld;cat;rm;grep;
 Conditions=exec <compare-driver.sh can-select %F>
