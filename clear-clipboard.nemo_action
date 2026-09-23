@@ -1,0 +1,8 @@
+[Nemo Action]
+Name=Clear clipboard
+Exec=sh -c 'xclip -i -selection clipboard < /dev/null && notify-send --transient "Clipboard cleared"'
+Selection=none
+Extensions=any
+
+Dependencies=xclip;sh;notify-send;
+Conditions=desktop;
