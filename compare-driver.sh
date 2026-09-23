@@ -9,14 +9,21 @@ case "$1" in
 		{
 			[ ! -e "$SAVE" ] ||
 			[ ! -e "$(cat "$SAVE")" ]
-		} &&
-		grep -qIF '' "$2"
+		} && {
+			grep -qIF '' "$2" ||
+			[ -d "$2" ]
+		}
 		exit
 		;;
 	can-compare)
 		[ -e "$SAVE" ] &&
-		[ -e "$(cat "$SAVE")" ] &&
-		grep -qIF '' "$2"
+		{
+			{ [ -f "$(cat "$SAVE")" ] && [ -f "$2" ]; } ||
+			{ [ -d "$(cat "$SAVE")" ] && [ -d "$2" ]; }
+		} && {
+			grep -qIF '' "$2" ||
+			[ -d "$2" ]
+		}
 		exit
 		;;
 	can-clear)
