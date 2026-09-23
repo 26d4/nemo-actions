@@ -1,0 +1,9 @@
+[Nemo Action]
+Name=Compare with selected file
+Exec=<compare-driver.sh compare %F>
+Selection=s
+Mimetypes=text/*;application/*;inode/directory;
+
+Icon-Name=meld
+Dependencies=meld;cat;rm;
+Conditions=exec <compare-driver.sh can-compare %F>

@@ -1,0 +1,9 @@
+[Nemo Action]
+Name=Clear comparison selection
+Exec=<compare-driver.sh clear>
+Selection=any
+Extensions=any
+
+Icon-Name=meld
+Dependencies=meld;cat;rm;
+Conditions=exec <compare-driver.sh can-clear>
