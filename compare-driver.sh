@@ -18,11 +18,8 @@ case "$1" in
 	can-compare)
 		[ -e "$SAVE" ] &&
 		{
-			{ [ -f "$(cat "$SAVE")" ] && [ -f "$2" ]; } ||
+			{ [ -f "$(cat "$SAVE")" ] && [ -f "$2" ] && grep -qIF '' "$2"; } ||
 			{ [ -d "$(cat "$SAVE")" ] && [ -d "$2" ]; }
-		} && {
-			grep -qIF '' "$2" ||
-			[ -d "$2" ]
 		}
 		exit
 		;;
