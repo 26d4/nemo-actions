@@ -1,0 +1,14 @@
+[Nemo Action]
+# Mandatory fields
+Name=Spaces to tabs
+Exec=<indent-tabs.py %F>
+Selection=s
+
+Mimetypes=text/*;application/*;
+# Optional fields
+Comment=Change indentation to tabs
+Icon-Name=format-indent-more-symbolic
+Quote=double
+Dependencies=python3;
+Conditions=exec grep -qIF '' %F
+Terminal=true

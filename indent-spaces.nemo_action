@@ -1,7 +1,7 @@
 [Nemo Action]
 # Mandatory fields
 Name=Tabs to spaces
-Exec=perl -e '$result = `expand -t4 %F`; print $result =~ s/^( +)/"\\033[44m \\033[0m" x length($1)/gmer; print "\nOK?[y/N]"; $reply = <>; if ($reply =~ m/y.*/i) { open my $fh, ">", %F or die; print $fh $result; close $fh }'
+Exec=perl -e '$result = `expand -it4 %F`; print $result =~ s/^( +)/"\\033[44m \\033[0m" x length($1)/gmer; print "\nOK?[y/N]"; $reply = <>; if ($reply =~ m/y.*/i) { open my $fh, ">", %F or die; print $fh $result; close $fh }'
 Selection=s
 
 Mimetypes=text/*;application/*;
