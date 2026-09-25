@@ -28,7 +28,7 @@ def chindent(line:str, size:int):
 
 result = "".join(map(chindent, lines, indents)).rstrip('\n')
 
-print(re.sub(r'^(\t+)', lambda m: '\033[44m\033[K\t|\033[0m\033[K' * len(m.group(1)), result, flags=re.MULTILINE))
+print(re.sub(r'^(\t+)', lambda m: '\033[44m\033[K|\t\033[0m\033[K' * len(m.group(1)), result, flags=re.MULTILINE))
 reply = input('OK? [y/N]')
 if reply.startswith(('y', 'Y')):
 	with open(sys.argv[1], 'w') as f:
