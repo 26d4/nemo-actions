@@ -5,6 +5,6 @@ Icon-Name=xsi-utilities-terminal-symbolic
 Selection=none
 Extensions=dir;
 Quote=double
-Dependencies=ssh;awk;findmnt;
+Dependencies=ssh;cut;findmnt;
 Terminal=true
 Conditions=exec sh -c 'case %U in "sftp"*) true\;\; *) findmnt -T %F -t fuse.sshfs >/dev/null\;\; esac';

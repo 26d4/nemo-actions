@@ -2,10 +2,10 @@
 
 case "$2" in
 	sftp*)
-		CONN=$(awk -F '/' '{print $3}' <<< "$2")
+		CONN=$(cut -d'/' -f3 <<< "$2")
 		TARGET=$(findmnt -T "$1" -no TARGET)
 		DIR="${1#"$TARGET"}"
-		DIR="/${DIR#/*/}"
+		DIR="/$(cut -d'/' -f3- <<< "$DIR")"
 		;;
 	file*)
 		CONN=$(findmnt -T "$1" -no SOURCE)
